@@ -47,18 +47,34 @@
 							</label>
 						</div>
 						<div class="well">
-							<p>This includes the following scripts, just above the end &lt;/body&gt; tag:</p>
-							<pre class="prettyprint">
+							<p>You'll first need a place to put the map.</p>
+<pre class="prettyprint">
+&lt;div style="display:inline-block; position:relative; width:100%;"&gt;
+  &lt;div style="margin-top:100%;"&gt;
+    &lt;div id="map" style="position:absolute; top:0; bottom:0; left:0;right:0;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+						</div>
+						<div class="well">
+							<p>Somewhere in your CSS, you'll need this.</p>
+<pre class="prettyprint">
+#map img { max-width: none; }
+</pre>
+						</div>
+						<div class="well">
+							<p>Include te required JS libraries, just above the end &lt;/body&gt; tag.</p>
+<pre class="prettyprint">
 &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://maps-api-ssl.google.com/maps/api/js?v=3.8&amp;sensor=false" type="text/javascript"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="js/tkmap.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="js/tkmapfusionlayer.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="js/treetrim.js"&gt;&lt;/script&gt;
-							</pre>
+</pre>
 						</div>
 						<div class="well">
-							<p><b>treetrim.js</b> includes the following code:</p>
-							<pre class="prettyprint">
+							<p>Here is this example's controller Javascript <b>treetrim.js</b>.</p>
+<pre class="prettyprint">
 $(document).ready(function() {
   // The Google Maps base map layer
   var Map = new TkMap('map','42.01048','-87.6652',15,true);
@@ -75,7 +91,7 @@ $(document).ready(function() {
     }
   });
 });
-							</pre>
+</pre>
 						</div>
 					</div>
 					<div class="span6">
