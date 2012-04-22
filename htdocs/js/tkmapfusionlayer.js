@@ -1,7 +1,7 @@
 /**
  * @fileoverview Google Fusion Data Map Layer
- * @author tom@komapre.us (Tom Kompare)
- * @package tom@komapre.usJsClass
+ * @author tom@kompare.us (Tom Kompare)
+ * @package tom@kompare.usJsClass
  * @version 1.0
  */
 /**

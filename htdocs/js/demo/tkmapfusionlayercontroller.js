@@ -1,7 +1,9 @@
+/**
+ * Using 'tkmap.2.0.0.js' and 'tkmpafusionlayer.1.0.0.js' 
+ */
 $(document).ready(function() {
 	// The Google Maps base map layer
-	var Map = new TkMap('map','42.01048','-87.6652',15,true);
-	Map.display();
+	var Map = new TkMap(true,'map','42.01048','-87.6652',15,true,'road.minlabels.grey');
 	// The tree trim request map layer
 	var TreeTrimLayer = new TkMapFusionLayer(Map.map,'3028961','Location');
 	TreeTrimLayer.showLayer();
