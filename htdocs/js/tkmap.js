@@ -188,6 +188,10 @@ function TkMap(showNow,domObject,lat,lng,zoomLevel,responsiveZoom,styleString)
 								featureType: "road.arterial",
 								elementType: "geometry",
 								stylers: [{ lightness: 85 }]
+							},
+							{
+								featureType: "water",
+								stylers: [{ lightness: -40 }]
 							}
 						);
 					}
