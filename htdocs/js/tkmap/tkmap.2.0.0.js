@@ -7,7 +7,7 @@
 /**
  * Class to simplify setting up a Google Map.
  * @requires google.maps JS API v3
- * @param {boolean} display - Should the map display upon object instantiation?
+ * @param {boolean} showNow - Should the map display upon object instantiation?
  * @param {char} domObject - Name of the HTML DOM object were the map is going
  * @param {float} lat - Map center latitude/longitude in decimal degrees
  * @param {float} lng - Map center latitude/longitude in decimal degrees

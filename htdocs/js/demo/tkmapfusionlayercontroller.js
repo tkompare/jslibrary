@@ -1,12 +1,11 @@
 /**
- * Using 'tkmap.2.0.0.js' and 'tkmpafusionlayer.1.0.0.js' 
+ * Using 'tkmap.2.1.0.js' and 'tkmpafusionlayer.2.0.0.js' 
  */
 $(document).ready(function() {
 	// The Google Maps base map layer
-	var Map = new TkMap(true,'map','42.01048','-87.6652',15,true,'road.minlabels.grey');
+	var Map = new TkMap(true,'map',42.01048,-87.6652,15,true,'road minlabels grey');
 	// The tree trim request map layer
-	var TreeTrimLayer = new TkMapFusionLayer(Map.map,'3028961','Location');
-	TreeTrimLayer.showLayer();
+	var TreeTrimLayer = new TkMapFusionLayer(true,Map.map,'3028961','Location');
 	// Open checkbos listener
 	$("#open").click(function() {
 		if ($("#open").is(':checked')) {

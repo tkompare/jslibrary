@@ -1,21 +1,27 @@
 /**
  * @fileoverview Google Fusion Data Map Layer
- * @author tom@kompare.us (Tom Kompare)
- * @package tom@kompare.usJsClass
- * @version 1.0
+ * @author tom@komapre.us (Tom Kompare)
+ * @package tom@komapre.usJsClass
+ * @version 1.0.0
  */
 /**
  * Class for putting Google Fusion Tables data on a Google Maps map.
  * @requires google.maps JS API v3
+ * @param {boolean} showNow - Should FT data display upon object instantiation?
  * @param {object} Map - The Google Maps map object
  * @param {string} fusionTableID - the ID of the Fusion Table
  * @param {string} latLngColumn - The column name holding the lat/lng data.
  * @param {string} icon - The name of a predefined Google Maps icon.
  */
-function TkMapFusionLayer (Map,fusionTableID,latLngColumn,icon) {
+function TkMapFusionLayer (showNow,Map,fusionTableID,latLngColumn,icon) {
 	/* Set Default parameters if not defined ***********************************/
 	icon = typeof icon !== 'undefined' ? icon : null;
 	/* PROPERTIES **************************************************************/
+	/**
+	 * Display FT data on instantiation
+	 * @type boolean
+	 */
+	this.showNow = showNow;
 	/**
 	 * The Google Maps map
 	 * @type object
@@ -116,4 +122,9 @@ function TkMapFusionLayer (Map,fusionTableID,latLngColumn,icon) {
 			this.layer.setMap(null);
 		}
 	};
+	//Should the map show on instatiation?
+	if(this.showNow === true)
+	{
+		this.showLayer();
+	}
 };
