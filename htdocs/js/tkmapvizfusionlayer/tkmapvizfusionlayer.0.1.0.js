@@ -65,14 +65,6 @@ function TkMapVizFusionLayer (showNow,Map,fusionTableID,iconColumn) {
 		keyColumn = typeof keyColumn !== 'undefined' ? keyColumn : null;
 		iconURL = typeof iconURL !== 'undefined' ? icon : this.iconColumn;
 		//this.hideLayer();
-/* REMOVE ****************************************************************/
-		testMarkerLatLng = new google.maps.LatLng(42.01048,-87.6652);
-		testMarker = new google.maps.Marker({
-			position: testMarkerLatLng,
-			map: this.Map,
-			icon: 'http://localhost:8888/img/o.png'
-		});
-/* REMOVE ****************************************************************/
 		// Am I displaying a search result?
 		if (type !== null && type === 'search' && keyColumn.length > 0 && string.length > 0)
 		{
@@ -100,86 +92,26 @@ function TkMapVizFusionLayer (showNow,Map,fusionTableID,iconColumn) {
 		else
 		{
 			var queryString = 'SELECT Latitude,Longitude,Status,CompletionDate FROM ' + this.fusionTableID;
-			var encodesql = encodeURIComponent(queryString);
-			this.FTQuery = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + encodesql);
 			var self = this;
-			this.FTQuery.send(function(response) {self.handleResponse(response);});
+			alert(queryString);
+			var url = 'https://www.google.com/fusiontables/api/query?sql=' + encodeURIComponent(queryString) + '&jsonCallback=?';
+			$.getJSON(url,function(response) {
+				self.handleResponse(response);
+			});
 		}
 	};
-	this.handleResponse = function(FTQueryResponse)
+	this.handleResponse = function(SqlRows)
 	{
-		this.FTTable = FTQueryResponse.getDataTable();
-		this.numCols = this.FTTable.getNumberOfColumns();
-		this.numRows = this.FTTable.getNumberOfRows();
-		alert(this.numRows);
-		var lat = null;
-		var lng = null;
-		var latCol = null;
-		var lngCol = null;
 		var markerLatLng = null;
-		for(var i=0; i<this.numCols; i++)
-		{
-			if (this.FTTable.getColumnLabel(i) === 'Latitude')
-			{
-				latCol = i;
-			}
-			else if (this.FTTable.getColumnLabel(i) === 'Longitude')
-			{
-				lngCol = i;
-			}
-		}
-		for(var i=0; i<this.numRows; i++)
-		{
-			lat = this.FTTable.getValue(i,latCol);
-			lng = this.FTTable.getValue(i,lngCol);
-			markerLatLng = new google.maps.LatLng(lat,lng);
+		for (var i = 0, row; row = SqlRows.table.rows[i]; i++) {
+			markerLatLng = new google.maps.LatLng(row[0],row[1]);
 			this.markers[i] = new google.maps.Marker({
 				position: markerLatLng,
 				map: this.Map,
 				icon: 'http://localhost:8888/img/o.png'
 			});
-		}
+		} 
 	};
-	/*
-		var numCols = DataTable.getNumberOfColumns();
-		var numRows = DataTable.getNumberOfRows();
-		var geoLat = null;
-		var geoLng = null;
-		var markers = [];
-		var markerLatLng = [];
-		var thisIcon = 'http://localhost:8888/img/o.png';
-		for(var i=0; i<numCols; i++)
-		{
-			if (DataTable.getColumnLabel(i) === 'Latitude')
-			{
-				geoLat = i;
-			}
-			else if (DataTable.getColumnLabel(i) === 'Longitude')
-			{
-				geoLng = i;
-			}
-		}
-		for(var i=0; i<numRows; i++)
-		{
-			//alert(this.layerData.getValue(i,this.geoLat)+','+this.layerData.getValue(i,this.geoLng));
-			markerLatLng = new google.maps.LatLng(this.layerData.getValue(i,this.geoLat),this.layerData.getValue(i,this.geoLng));
-			markers[i] = new google.maps.Marker({
-				position: markerLatLng,
-				map: this.Map,
-				icon: icon
-			});
-		}
-	};
-	*/
-	this.placeMarker = function(LatLng,icon)
-	{
-		return new google.maps.Marker({
-			position: LatLng,
-			map: this.Map,
-			icon: icon
-		});
-	};
-	
 	/**
 	 * Hide the Fusion Tables data layer.
 	 */
