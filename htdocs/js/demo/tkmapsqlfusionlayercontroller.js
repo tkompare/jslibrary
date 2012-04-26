@@ -6,7 +6,7 @@ $(document).ready(function() {
 	// The Google Maps base map layer
 	var Map = new TkMap(true,'map',42.01048,-87.6652,15,true,'road');
 	// The tree trim request map layer
-	var TreeTrimLayer = new TkMapVizFusionLayer(true,Map.map,'3028961','Location');
+	var TreeTrimLayer = new TkMapSqlFusionLayer(true,Map.map,'3028961','Location');
 	// Open checkbos listener
 	$("#open").click(function() {
 		if ($("#open").is(':checked')) {

@@ -12,7 +12,7 @@
  * @param {string} fusionTableID - the ID of the Fusion Table
  * @param {string} iconColumn - The column name holding the icon URL.
  */
-function TkMapVizFusionLayer (showNow,Map,fusionTableID,iconColumn) {
+function TkMapSqlFusionLayer (showNow,Map,fusionTableID,iconColumn) {
 	/* Set Default parameters if not defined ***********************************/
 	icon = typeof icon !== 'undefined' ? icon : null;
 	/* PROPERTIES **************************************************************/
