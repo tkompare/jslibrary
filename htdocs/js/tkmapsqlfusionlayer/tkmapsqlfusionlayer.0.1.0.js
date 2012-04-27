@@ -13,7 +13,7 @@
  * @param {string} latLngCols - the name of the latitude and longitude columns, separated by a comma
  * @param {string} dataCols - the comma-separated list of metadata columns
  * @param {string} icon - The column name holding the icon name
- * @param {string} iconType - the type of icon name: URL or column
+ * @param {string} iconType - the type of icon name: URL of 'image' or 'column'
  */
 function TkMapSqlFusionLayer (showNow,Map,fusionTableID,latLngCols,dataCols,icon,iconType) {
 	/* Set Default parameters if not defined ***********************************/
@@ -57,6 +57,19 @@ function TkMapSqlFusionLayer (showNow,Map,fusionTableID,latLngCols,dataCols,icon
 	 * @type array of object
 	 */
 	this.markers = [];
+	/**
+	 * Comma-delimited column names from Fusion Tables
+	 */
+	this.cols = this.latLngCols +','+this.dataCols;
+	if(this.iconType === 'column')
+	{
+		this.cols += this.icon;
+	}
+	/**
+	 * Array of Column Names
+	 */
+	this.colNames = this.cols.split(',');
+	this.Table = null;
 	/* METHODS *****************************************************************/
 	/**
 	 * Show the Fusion Tables data layer on the map
@@ -83,61 +96,81 @@ function TkMapSqlFusionLayer (showNow,Map,fusionTableID,latLngCols,dataCols,icon
 			queryString += ',' + this.icon;
 		}
 		queryString += ' FROM ' + this.fusionTableID;
-		// I am who I am and that's all that I am.
+		// I yam what I yam and that's all that I yam.
 		var self = this;
-		//this.hideLayer();
+		this.hideLayer();
 		// Am I displaying a search result?
 		if (type !== null && type === 'search' && keyColumn.length > 0 && string.length > 0)
 		{
-			var query = {
-					select: this.latLngColumn,
-					from: this.fusionTableID,
-					where: keyColumn+" CONTAINS IGNORING CASE '"+string+"'"
-				};
-			if (this.icon !== null)
+			// Find the search column
+			var searchCol = this.colNames.indexOf(keyColumn);
+			// Iterate through all the table rows
+			for (var i=0; i<this.Table.rows.length; i++)
 			{
-				this.layer = new google.maps.FusionTablesLayer({
-					query: query,
-					styles: [{
-						markerOptions: { iconName: iconURL }
-					}]
-				});
-			}
-			else
-			{
-				this.layer = new google.maps.FusionTablesLayer({
-					query: query
-				});
+				// If the row's search column equale the search string...
+				if(this.Table.rows[i][searchCol] === string)
+				{
+					// Put that marker back on the map.
+					this.markers[i].setMap(this.Map);
+				}
 			}
 		}
 		else
 		{
-			var url = 'https://www.google.com/fusiontables/api/query?sql=' + encodeURIComponent(queryString) + '&jsonCallback=?';
-			$.getJSON(url,function(response) {
-				self.handleResponse(response);
-			});
+			if (this.markers.length === 0)
+			{
+				var url = 'https://www.google.com/fusiontables/api/query?sql=' + encodeURIComponent(queryString) + '&jsonCallback=?';
+				$.getJSON(url,function(SqlRepsonse) {
+					self.handleResponse(SqlRepsonse);
+				});
+			}
+			else
+			{
+				for (var i=0; i<this.markers.length; i++)
+				{
+					this.markers[i].setMap(this.Map);
+				}
+			}
 		}
 	};
-	this.handleResponse = function(SqlRows)
+	this.handleResponse = function(SqlRepsonse)
 	{
 		var markerLatLng = null;
-		for (var i = 0, row; row = SqlRows.table.rows[i]; i++) {
+		this.Table = SqlRepsonse.table;
+		for (var i = 0, row; row = this.Table.rows[i]; i++) {
 			markerLatLng = new google.maps.LatLng(row[0],row[1]);
-			this.markers[i] = new google.maps.Marker({
-				position: markerLatLng,
-				map: this.Map,
-				icon: '/img/o.png'
-			});
-		} 
+			// if the this.icon is an image
+			if (this.iconType === 'image')
+			{
+				this.markers[i] = new google.maps.Marker({
+					position: markerLatLng,
+					map: this.Map,
+					icon: this.icon
+				});
+			}
+			// If the this.icon is a column...
+			else if (this.iconType === 'column')
+			{
+				var iconCol = this.colNames.indexOf(this.icon);
+				this.markers[i] = new google.maps.Marker({
+					position: markerLatLng,
+					map: this.Map,
+					icon: row[iconCol]
+				});
+			}
+		}
 	};
 	/**
 	 * Hide the Fusion Tables data layer.
 	 */
 	this.hideLayer = function()
 	{
-		if (this.layer !== null)
+		if (this.markers.length > 0)
 		{
-			this.layer.setMap(null);
+			for (var i=0; i<this.markers.length; i++)
+			{
+				this.markers[i].setMap(null);
+			}
 		}
 	};
 	//Should the map show on instatiation?
