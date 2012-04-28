@@ -107,8 +107,8 @@ function TkMapSqlFusionLayer (showNow,Map,fusionTableID,latLngCols,dataCols,icon
 			// Iterate through all the table rows
 			for (var i=0; i<this.Table.rows.length; i++)
 			{
-				// If the row's search column equale the search string...
-				if(this.Table.rows[i][searchCol] === string)
+				// If the row's search column contains the search string...
+				if(this.Table.rows[i][searchCol].indexOf(string) > -1)
 				{
 					// Put that marker back on the map.
 					this.markers[i].setMap(this.Map);

@@ -20,16 +20,16 @@ $(document).ready(function() {
 		Map.map,
 		'3676987',
 		'Latitude,Longitude',
-		'StreetAddress,ServiceRequestNumber,Status,CreationDate,CompletionDate',
+		'Status',
 		'/img/o.png',
 		'image'
 	);
 	// Open checkbox listener
 	$("#open").click(function() {
 		if ($("#open").is(':checked')) {
-			TreeTrimLayer.showLayer();
+			TreeTrimLayer.showLayer('search','Open','Status');
 		} else {
-			TreeTrimLayer.hideLayer();
+			TreeTrimLayer.showLayer();
 		}
 	});
 });
