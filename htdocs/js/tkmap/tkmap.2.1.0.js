@@ -2,7 +2,7 @@
  * @fileoverview Google Maps Base Map Object
  * @author tom@kompare.us (Tom Kompare)
  * @package tom@kompare.usJsClass
- * @version 2.0.0
+ * @version 2.1.0
  */
 /**
  * Class to simplify setting up a Google Map.
