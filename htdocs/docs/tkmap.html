@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>tkmap.js Documentation</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 minimim-scale=1">
+	<meta name="description" content="A Javascript library of useful tools">
+	<meta name="author" content="tom@kompare.us (Tom Kompare)">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/prettify.css" rel="stylesheet" />
+	<style type="text/css">
+	body {
+		padding-top: 50px;
+		padding-bottom: 15px;
+	}
+	</style>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="apple-touch-icon" href="/img/311icon.png">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+<body onload="prettyPrint()">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="/">JS Library</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="/demos.html">Demos</a></li>
+						<li class="active"><a href="/docs.html">Docs</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="hero-unit">
+			<h1>tkmap.js</h1>
+			<p>Documentation for version 2.1.0</p>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<h2>Constructor</h2>
+				<div class="well">
+<pre class="prettyprint">
+TkMap (
+  &lt;draw&gt; {boolean},
+  &lt;dom_id&gt; {string},
+  &lt;mapCenterLatitude&gt; {float},
+  &lt;mapCenterLongitutde&gt; {float},
+  &lt;zoomLevel&gt; {int:optional},
+  &lt;responsiveZoom&gt; {boolean:optional},
+  &lt;mapStyleOptions&gt; {string:optional};
+);</pre>
+					<h3>Examples</h3>
+<pre class="prettyprint">
+TkMap(true,'map',42.01048,-87.6652,15,true,'road minlabels grey');</pre>
+<pre class="prettyprint">
+themap = new TkMap(false,'map',42.01048,-87.6652);
+themap.display();</pre>
+					<h3>Arguments</h3>
+					<div class="well">
+						<h4>&lt;draw&gt;</h4>
+						<p><span class="label label-info">boolean</span> If set to '<i>true</i>',
+							the map will render as part of the instantiation of the class. If
+							set to '<i>false</i>', the map will not render until the <i>.display</i>
+							method is called.
+						</p>
+					</div>
+					<div class="well">
+						<h4>&lt;dom_id&gt;</h4>
+						<p><span class="label label-info">string</span> The <i>id</i> value
+							of the HTML DOM object into which the map will render. This is
+							usually a &lt;div&gt; tag. Example of the required HTML:
+						</p>
+<pre class="prettyprint">
+&lt;div id="map"&gt;&lt;/div&gt;
+</pre>
+					</div>
+					<div class="well">
+						<h4>&lt;mapCenterLatitude&gt;</h4>
+						<p><span class="label label-info">float</span> The map center latitude
+							upon initial render. In decimal degrees.
+						</p>
+					</div>
+					<div class="well">
+						<h4>&lt;mapCenterLongitude&gt;</h4>
+						<p><span class="label label-info">float</span> The map center longitude
+							upon initial render. In decimal degrees.
+						</p>
+					</div>
+					<div class="well">
+						<h4>&lt;zoomLevel&gt;</h4>
+						<p><span class="label label-info">integer</span> <span class="label label-info">
+							optional</span> The map zoom level upon initial render. If this
+							argument is not passed, the initial zoom level is set to
+							<b>15</b>.
+						</p>
+					</div>
+					<div class="well">
+						<h4>&lt;responsiveZoom&gt;</h4>
+						<p><span class="label label-info">boolean</span> <span class="label label-info">
+							optional</span> If set to '<i>true</i>', the initial map zoom
+							level will vary based on the browser width (<i>innerWidth</i>).
+							Below 481 pixels, the zoom level is &lt;zoomLevel&gt; - 1.
+							Above 980 pixels, If this argument is not passed, the zoom level
+							is &lt;zoomLevel&gt; + 1. If this argument is not passed, the default
+							value is '<i>false</i>'.
+						</p>
+					</div>
+					<div class="well">
+						<h4>&lt;mapStyleOptions&gt;</h4>
+						<p><span class="label label-info">string</span> <span class="label label-info">
+							optional</span> The map is styled with a series of defined styles.
+						</p>
+						<ul>
+							<li><b>road</b>: A road map.
+							<li><b>satellite</b>: A satellite map.
+							<li><b>hybrid</b>: A hybrid map. A satellite map with roads and
+								labels.
+							<li><b>terrain</b>: A terrain map.
+							<li><b>grey</b>: A greyscale map.
+							<li><b>minlabels</b>: Only road, neighborhood, city, state, and
+							country labels shown.
+						</ul>
+					</div>
+				</div>
+				<h2>Properties</h2>
+				<div class="well">
+					<div class="well">
+						<h4>.map</h4>
+						<p>This is the <i>google.maps.Map</i> object. Any <i>google.maps.Map</i> methods
+						from the Google Maps Javascript API should be directed at this
+						property.
+						</p>
+					</div>
+				</div>
+				<h2>Methods</h2>
+				<div class="well">
+					<div class="well">
+						<h4>.display()</h4>
+						<p>Displays the map in the specified HTML DOM object. If the constructor's &lt;draw&gt;
+							argument is set to '<i>false</i>', this <i>.display()</i> method
+							must be called.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<footer>
+			<p>Author: <a href="http://twitter.com/tomkompare">Tom Kompare</a></p>
+			<p>Code: <a href="https://github.com/tkompare/jslibrary">https://github.com/tkompare/jslibrary</a></p>
+			<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/us/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/">Creative Commons Attribution-NonCommercial 3.0 United States License</a>.</p>
+		</footer>
+	</div>
+	
+	<!-- Le javascript ================================================== -->
+	<script src="/js/thirdparty/bootstrap.min.js"></script>
+		<script src="/js/thirdparty/prettify.js"></script>
+	<script>
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-31004074-1']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+</html>
