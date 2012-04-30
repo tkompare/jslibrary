@@ -2,7 +2,7 @@
  * @fileoverview Google Fusion SQL API Data Map Layer
  * @author tom@kompare.us (Tom Kompare)
  * @package tom@komapre.usJsClass
- * @version 1.0.0
+ * @version 0.1.0
  */
 /**
  * Class for putting Google Fusion Tables SQL API data on a Google Maps map
