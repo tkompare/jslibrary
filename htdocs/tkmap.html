@@ -48,12 +48,8 @@
 				<div class="row-fluid">
 					<div class="span6">
 						<div class="row-fluid">
-							<div class="span2">
-								<p><a class="btn btn-primary" href="demos.html"><i class="icon-chevron-left icon-white"></i> Back</a></p>
-							</div>
-							<div class="span10">
-								<h2>JS Library Demo</h2>
-								<h3>tkmap.js</h3>
+							<div class="span12">
+								<h2>tkmap.js Demo</h2>
 							</div>
 						</div>
 						<hr>
@@ -79,9 +75,9 @@
 						<div class="well">
 							<p>Include required JS libraries, just above the end &lt;/body&gt; tag.</p>
 <pre class="prettyprint">
-&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://maps-api-ssl.google.com/maps/api/js?v=3.8&amp;sensor=false"&gt;&lt;/script&gt;
-&lt;script src="js/tkmap.2.1.0.js"&gt;&lt;/script&gt;
+&lt;script src="js/tkmap.3.0.0.js"&gt;&lt;/script&gt;
 &lt;script src="js/tkmapcontroller.js"&gt;&lt;/script&gt;
 </pre>
 						</div>
@@ -90,7 +86,7 @@
 <pre class="prettyprint">
 $(document).ready(function() {
   // The Google Maps base map layer
-  TkMap(true,'map',42.01048,-87.6652,15,true,'road minlabels grey');
+  TkMap({lat:42.01048,lng:-87.6652,domid:'map',init:true});
 });
 </pre>
 						</div>
@@ -128,7 +124,7 @@ $(document).ready(function() {
 	<script src="js/thirdparty/bootstrap.min.js"></script>
 	<script src="js/thirdparty/prettify.js"></script>
 	<script src="https://maps-api-ssl.google.com/maps/api/js?v=3.8&sensor=false"></script>
-	<script src="js/tkmap/tkmap.2.1.0.js"></script>
+	<script src="js/tkmap/tkmap.3.0.0.js"></script>
 	<script src="js/demo/tkmapcontroller.js"></script>
 	<script>
 		var _gaq = _gaq || [];

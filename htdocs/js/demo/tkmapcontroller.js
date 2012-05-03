@@ -1,7 +1,11 @@
 /**
- * Using 'tkmap.2.1.0.js'
+ * Using 'tkmap.3.0.0.js'
  */
 $(document).ready(function() {
 	// The Google Maps base map layer
-	TkMap(true,'map',42.01048,-87.6652,15,true,'road minlabels grey');
+	TkMap({lat:42.01048,lng:-87.6652,domid:'map',init:true});
+	//Map.setMapOptions({zoom:15});
+	//Map.setResponsive();
+	//Map.setCustomStyles({styles:'grey minlabels'});
+	//Map.initMap();
 });

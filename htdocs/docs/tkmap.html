@@ -43,40 +43,39 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h1>tkmap.js</h1>
-			<p>Documentation for version 2.1.0</p>
+			<p>Documentation for version 3.0.0</p>
 		</div>
 		<div class="row">
 			<div class="span12">
+				<h2>Examples</h2>
+				<div class="well">
+				<pre class="prettyprint">
+TkMap({lat:42.01048,lng:-87.6652,domid:'map',init:true});</pre>
+<pre class="prettyprint">
+Map = new TkMap({domid:'map',lat:42.01048,lng:-87.6652,zoom:12});
+Map.setMapOptions({zoomControl:false});
+Map.setResponsive();
+Map.setCustomStyles({styles:'grey minlabels hybrid'});
+Map.initMap();</pre>
+					<p><a href="../tkmap.html">See a working example</a></p>
+				</div>
 				<h2>Constructor</h2>
 				<div class="well">
 <pre class="prettyprint">
-TkMap (
-  &lt;draw&gt; {boolean},
-  &lt;dom_id&gt; {string},
-  &lt;mapCenterLatitude&gt; {float},
-  &lt;mapCenterLongitutde&gt; {float},
-  &lt;zoomLevel&gt; {int:optional},
-  &lt;responsiveZoom&gt; {boolean:optional},
-  &lt;mapStyleOptions&gt; {string:optional};
-);</pre>
-					<h3>Examples</h3>
-<pre class="prettyprint">
-TkMap(true,'map',42.01048,-87.6652,15,true,'road minlabels grey');</pre>
-<pre class="prettyprint">
-themap = new TkMap(false,'map',42.01048,-87.6652);
-themap.display();</pre>
+TkMap ({
+  domid : {string},
+  init : {boolean},
+  lat : {float},
+  lng : {float},
+  zoom : {int}
+});</pre>
 					<h3>Arguments</h3>
+					<p>The order in which arguments are defined in the constructor is 
+						meaningless. However <b>domid</b>, <b>lat</b>, and <b>lng</b> are required.</p>
 					<div class="well">
-						<h4>&lt;draw&gt;</h4>
-						<p><span class="label label-info">boolean</span> If set to '<i>true</i>',
-							the map will render as part of the instantiation of the class. If
-							set to '<i>false</i>', the map will not render until the <i>.display</i>
-							method is called.
-						</p>
-					</div>
-					<div class="well">
-						<h4>&lt;dom_id&gt;</h4>
-						<p><span class="label label-info">string</span> The <i>id</i> value
+						<h4>domid</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">required</span> The <i>id</i> value
 							of the HTML DOM object into which the map will render. This is
 							usually a &lt;div&gt; tag. Example of the required HTML:
 						</p>
@@ -85,57 +84,41 @@ themap.display();</pre>
 </pre>
 					</div>
 					<div class="well">
-						<h4>&lt;mapCenterLatitude&gt;</h4>
-						<p><span class="label label-info">float</span> The map center latitude
-							upon initial render. In decimal degrees.
+						<h4>init</h4>
+						<p><span class="label label-info">boolean</span>
+							<span class="label label-info">optional</span> If set to
+							'<i>true</i>', the map will render as part of the instantiation of
+							the class. If set to '<i>false</i>', the map will not render until
+							the <i>.display</i> method is called.
 						</p>
 					</div>
 					<div class="well">
-						<h4>&lt;mapCenterLongitude&gt;</h4>
-						<p><span class="label label-info">float</span> The map center longitude
-							upon initial render. In decimal degrees.
+						<h4>lat</h4>
+						<p><span class="label label-info">float</span>
+							<span class="label label-info">required</span> The map center
+							latitude upon initial render. In decimal degrees.
 						</p>
 					</div>
 					<div class="well">
-						<h4>&lt;zoomLevel&gt;</h4>
-						<p><span class="label label-info">integer</span> <span class="label label-info">
-							optional</span> The map zoom level upon initial render. If this
-							argument is not passed, the initial zoom level is set to
-							<b>15</b>.
+						<h4>lng</h4>
+						<p><span class="label label-info">float</span>
+						<span class="label label-info">required</span> The map center
+							longitude upon initial render. In decimal degrees.
 						</p>
 					</div>
 					<div class="well">
-						<h4>&lt;responsiveZoom&gt;</h4>
-						<p><span class="label label-info">boolean</span> <span class="label label-info">
-							optional</span> If set to '<i>true</i>', the initial map zoom
-							level will vary based on the browser width (<i>innerWidth</i>).
-							Below 481 pixels, the zoom level is &lt;zoomLevel&gt; - 1.
-							Above 980 pixels, If this argument is not passed, the zoom level
-							is &lt;zoomLevel&gt; + 1. If this argument is not passed, the default
-							value is '<i>false</i>'.
+						<h4>zoom</h4>
+						<p><span class="label label-info">integer</span> 
+							<span class="label label-info">optional</span> The map zoom level
+							upon initial render. If this argument is not passed, the initial
+							zoom level is set to <b>15</b>.
 						</p>
-					</div>
-					<div class="well">
-						<h4>&lt;mapStyleOptions&gt;</h4>
-						<p><span class="label label-info">string</span> <span class="label label-info">
-							optional</span> The map is styled with a series of defined styles.
-						</p>
-						<ul>
-							<li><b>road</b>: A road map.
-							<li><b>satellite</b>: A satellite map.
-							<li><b>hybrid</b>: A hybrid map. A satellite map with roads and
-								labels.
-							<li><b>terrain</b>: A terrain map.
-							<li><b>grey</b>: A greyscale map.
-							<li><b>minlabels</b>: Only road, neighborhood, city, state, and
-							country labels shown.
-						</ul>
 					</div>
 				</div>
 				<h2>Properties</h2>
 				<div class="well">
 					<div class="well">
-						<h3>.map</h3>
+						<h3>.Map</h3>
 						<p>This is the <i>google.maps.Map</i> object. Any <i>google.maps.Map</i> methods
 						from the Google Maps Javascript API should be directed at this
 						property.
@@ -145,11 +128,60 @@ themap.display();</pre>
 				<h2>Methods</h2>
 				<div class="well">
 					<div class="well">
-						<h3>.display()</h3>
-						<p>Displays the map in the specified HTML DOM object. If the constructor's &lt;draw&gt;
-							argument is set to '<i>false</i>', this <i>.display()</i> method
-							must be called.
+						<h3>.initMap()</h3>
+						<p>Displays the map in the specified HTML DOM object. If the
+							constructor's <i>init</i> argument is not set, or set to
+							'<i>false</i>', this <i>.initMap()</i> method must be called.
 						</p>
+					</div>
+					<div class="well">
+						<h3>.setCustomStyles()</h3>
+						<h4>Example</h4>
+<pre class="prettyprint">
+Map.setCustomStyles({styles:'road grey minlabels'});
+</pre>
+						<p>The map is styled with a series of defined styles. Separate
+						styles with a space.</p>
+						<ul>
+							<li><b>road</b>: A road map.
+							<li><b>satellite</b>: A satellite map.
+							<li><b>hybrid</b>: A hybrid map. A satellite map with roads and
+								labels.
+							<li><b>terrain</b>: A terrain.
+							<li><b>grey</b>: A greyscale colored map.
+							<li><b>minlabels</b>: Only road, neighborhood, city, state, and
+							country labels shown.
+						</ul>
+					</div>
+					<div class="well">
+						<h3>.setResponsive()</h3>
+						<p>The initial map zoom level will vary based on the
+							 map DOM element's pixel width. Below 481 pixels, the zoom
+							level is default <b>zoom</b> - 1. Above 980 pixels, the zoom level
+							is default <b>zoom</b> + 1.
+						</p>
+					</div>
+					<div class="well">
+						<h3>.setMapOptions()</h3>
+						<h4>Example</h4>
+<pre class="prettyprint">
+Map.setMapOptions({zoomControl:false});
+</pre>
+						<p>Extend the TkMap.MapOptions property with more options from
+							<a href="https://developers.google.com/maps/documentation/javascript/reference#MapOptions">
+							google.map.MapOptions</a> object. If you pass an option already
+							defined, this method will overwrite the previous value. 
+						</p>
+						<p>Options set by default are:</p>
+<pre class="prettyprint">
+center : new google.maps.LatLng(&lt;lat & lng from constructor&gt;),
+mapTypeControl : false,
+mapTypeId : google.maps.MapTypeId.ROADMAP,
+panControl : false,
+streetViewControl : false,
+styles : [],
+zoom: &lt;zoom from constructor or 15&gt;,
+zoomControl : true</pre>
 					</div>
 				</div>
 			</div>
