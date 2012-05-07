@@ -1,5 +1,5 @@
 /**
- * Using 'tkmap.3.0.0.js' and 'tkmpafusionlayer.2.0.0.js' 
+ * Using 'tkmap.3.0.0.js' and 'tkmpafusionlayer.3.0.0.js' 
  */
 $(document).ready(function() {
 	// The Google Maps base map layer
@@ -7,13 +7,13 @@ $(document).ready(function() {
 	themap.setCustomStyles({styles:'grey minlabels'});
 	themap.initMap();
 	// The tree trim request map layer
-	var TreeTrimLayer = new TkMapFusionLayer(true,themap.Map,'3028961','Location');
+	var TreeTrimLayer = new TkMapFusionLayer({map:themap.Map,tableid:'3028961',geo:'Location'});
 	// Open checkbox listener
 	$("#open").click(function() {
 		if ($("#open").is(':checked')) {
-			TreeTrimLayer.showLayer('search','Open','Status');
+			TreeTrimLayer.showLayer({where:"Status = 'Open'",icon:'small_green'});
 		} else {
-			TreeTrimLayer.showLayer();
+			TreeTrimLayer.showLayer({});
 		}
 	});
 });

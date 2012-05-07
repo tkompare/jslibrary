@@ -43,61 +43,83 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h1>tkmapfusionlayer.js</h1>
-			<p>Documentation for version 2.0.0</p>
+			<p>Documentation for version 3.0.0</p>
 		</div>
 		<div class="row">
 			<div class="span12">
+				<h2>Examples</h2>
+				<div class="well">
+				<pre class="prettyprint">
+var MapLayer = new TkMapFusionLayer({
+  map:themap.Map,
+  tableid:'3028961',
+  geo:'Location'
+});</pre>
+<pre class="prettyprint">
+var MapLayer = new TkMapFusionLayer({
+  map:themap.Map,
+  tableid:'3028961',
+  geo:'Location',
+  where:"Status CONTAINS IGNORING CASE 'Open'"
+});</pre>
+					<p><a href="../tkmapfusionlayer.html">See a working example</a></p>
+				</div>
 				<h2>Constructor</h2>
 				<div class="well">
 <pre class="prettyprint">
-TkMapFusionTableLayer (
-  &lt;draw&gt; {boolean},
-  &lt;mapObject&gt; {object},
-  &lt;fusionTableId&gt; {string},
-  &lt;geoColumn&gt; {string},
-  &lt;icon&gt; {string:optional}
-);</pre>
-					<h3>Examples</h3>
-<pre class="prettyprint">
-TkMapFusionLayer(true,Map.map,'3028961','Location');</pre>
-<pre class="prettyprint">
-var TreeTrimLayer = new TkMapFusionLayer(false,Map.map,'3028961','Location','grn_blank');
-TreeTrimLayer.showLayer();</pre>
+TkMapFusionLayer ({
+  geo : {string},
+  icon : {string},
+  map : {object},
+  tableid : {int},
+  where : {string}
+});</pre>
 					<h3>Arguments</h3>
+					<p>The order in which arguments are defined in the constructor is 
+						meaningless. However <b>geo</b>, <b>map</b>, and <b>tableid</b> are required.</p>
 					<div class="well">
-						<h4>&lt;draw&gt;</h4>
-						<p><span class="label label-info">boolean</span> If set to '<i>true</i>',
-							the Fusion Tables map layer will render as part of the instantiation
-							of the class. If set to '<i>false</i>', it will not render until
-							the <i>.showLayer</i> method is called.
+						<h4>geo</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">required</span> The name of the
+							Google Fusion Tables column that holds the geographic location
+							information for the row of data. The geographic information must
+							be in decimal degrees.
 						</p>
 					</div>
 					<div class="well">
-						<h4>&lt;mapObject&gt;</h4>
-						<p><span class="label label-info">object</span> The 
-							<i>google.maps.Map</i> object onto which this Fusion Tables data
-							layer is will display. If you are using TkMap base map object,
-							this would be the '<i>TkMap.map</i>' property.
-						</p>
-					</div>
-					<div class="well">
-						<h4>&lt;fusionTableId&gt;</h4>
-						<p><span class="label label-info">string</span> The 'Numeric ID' of
-							the Google Fusion Table.
-						</p>
-					</div>
-					<div class="well">
-						<h4>&lt;geoColumn&gt;</h4>
-						<p><span class="label label-info">string</span> The Fusion Table 
-							column that holds the geographic point, line, or polygon
-							information. In decimal degrees.
-						</p>
-					</div>
-					<div class="well">
-						<h4>&lt;icon&gt;</h4>
+						<h4>icon</h4>
 						<p><span class="label label-info">string</span> 
 							<span class="label label-info">optional</span> The name of the
-							Google Fusion Table icon to use. Point map only.
+							Google Fusion Table icon to use. Point map only. The value must be
+							one from the 'iconName' list of <a href="http://www.google.com/fusiontables/DataSource?dsrcid=308519">
+							supported Google icons</a>.
+						</p>
+					</div>
+					<div class="well">
+						<h4>map</h4>
+						<p><span class="label label-info">object</span>
+							<span class="label label-info">required</span> The 
+							<i>google.maps.Map</i> object onto which this Fusion Tables data
+							layer is will display. If you are using <a href="tkmap.html">TkMap base map object</a>,
+							this would be the '<i>TkMap.Map</i>' property.
+						</p>
+					</div>
+					<div class="well">
+						<h4>tableid</h4>
+						<p><span class="label label-info">integer</span>
+							<span class="label label-info">required</span> The 'Numeric ID' of
+							the Google Fusion Table to place on the map.
+						</p>
+					</div>
+					<div class="well">
+						<h4>where</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">optional</span> The WHERE clause
+							for the Google Fusion Table query. If this argument is not
+							defined, all data rows are mapped. Follow the specification found
+							in the <a href="https://developers.google.com/fusiontables/docs/developers_reference#Select">
+							Google Fusion Tables documentation</a>. The syntax is generally:
+							&lt;column_name&gt; &lt;operator&gt; &lt;value&gt;
 						</p>
 					</div>
 				</div>
@@ -105,38 +127,34 @@ TreeTrimLayer.showLayer();</pre>
 				<div class="well">
 					<div class="well">
 						<h3>.showLayer()</h3>
-						<p>Displays the map layer in the specified google.maps.Map object.
-							If the constructor's &lt;draw&gt; argument is set to '<i>false</i>',
-							this <i>.showLayer()</i> method must be called. If no arguments
-							are passed, all data rows are mapped.
+						<h4>Example</h4>
+<pre class="prettyprint">
+MapLayer.showLayer({icon:'red_blank',where:"Status = 'Open'"});
+</pre>
+						<p>Displays the Google Fusion Table map layer in the specified
+							'google.maps.Map' object.
 						</p>
 						<h4>Arguments</h4>
-						<p><b>&lt;type&gt;</b><br>
-							<span class="label label-info">string</span> 
-							<span class="label label-info">optional</span> If set to '<i>search</i>',
-							this method will perform a "CONTAINS IGNORING CASE" search on the
-							Fusion Tables data.
-						</p>
-						<p><b>&lt;string&gt;</b><br>
-							<span class="label label-info">string</span> 
-							<span class="label label-info">optional</span> The string value on which
-							this method will search the Fusion Tables data.
-						</p>
-						<p><b>&lt;keyColumn&gt;</b><br>
-							<span class="label label-info">string</span> 
-							<span class="label label-info">optional</span> The name of the
-							Fusion Tables column to search.
-						</p>
-						<p><b>&lt;icon&gt;</b><br>
+						<p><b>icon</b><br>
 							<span class="label label-info">string</span> 
 							<span class="label label-info">optional</span> The name of the
 							Google Fusion Table icon to use. Point map only. If not passed,
 							and this is a point layer, it will default to the
-							TkMapFusionLayer.icon property value, if defined.
+							<i>TkMapFusionLayer.Icon</i> property value, if defined. The value
+							must be one from the 'iconName' list of
+							<a href="http://www.google.com/fusiontables/DataSource?dsrcid=308519">
+							supported Google icons</a>.
 						</p>
-						<h4>Example</h4>
-<pre class="prettyprint">
-TkMapFusionLayer.showLayer('search','Open','Status','red_blank');</pre>
+						<p><b>where</b><br>
+							<span class="label label-info">string</span> 
+							<span class="label label-info">optional</span> The WHERE clause
+							for the Google Fusion Table query. If this argument is not
+							defined, it will default to the <i>TkMapFusionLayer.Where</i>
+							property value, if defined. Follow the specification found in the
+							<a href="https://developers.google.com/fusiontables/docs/developers_reference#Select">
+							Google Fusion Tables documentation</a>. The syntax is generally:
+							&lt;column_name&gt; &lt;operator&gt; &lt;value&gt;
+						</p>
 					</div>
 					<div class="well">
 						<h3>.hideLayer()</h3>

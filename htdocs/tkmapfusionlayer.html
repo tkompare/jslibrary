@@ -35,7 +35,7 @@
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li><a href="/">Home</a></li>
-						<li><a href="demos.html">Demos</a></li>
+						<li class="active"><a href="demos.html">Demos</a></li>
 						<li><a href="docs.html">Docs</a></li>
 					</ul>
 				</div>
@@ -48,12 +48,8 @@
 				<div class="row-fluid">
 					<div class="span6">
 						<div class="row-fluid">
-							<div class="span2">
-								<p><a class="btn btn-primary" href="demos.html"><i class="icon-chevron-left icon-white"></i> Back</a></p>
-							</div>
-							<div class="span10">
-								<h2>JS Library Demo</h2>
-								<h3>tkmapfusionlayer.js</h3>
+							<div class="span12">
+								<h2>tkmapfusionlayer.js Demo</h2>
 							</div>
 						</div>
 						<hr>
@@ -85,7 +81,7 @@
 &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://maps-api-ssl.google.com/maps/api/js?v=3.8&amp;sensor=false"&gt;&lt;/script&gt;
 &lt;script src="js/tkmap.3.0.0.js"&gt;&lt;/script&gt;
-&lt;script src="js/tkmapfusionlayer.2.0.0.js"&gt;&lt;/script&gt;
+&lt;script src="js/tkmapfusionlayer.3.0.0.js"&gt;&lt;/script&gt;
 &lt;script src="js/tkmapfusionlayercontroller.js"&gt;&lt;/script&gt;
 </pre>
 						</div>
@@ -98,13 +94,13 @@ $(document).ready(function() {
   themap.setCustomStyles({styles:'grey minlabels'});
   themap.initMap();
   // The tree trim request map layer
-  var TreeTrimLayer = new TkMapFusionLayer(true,themap.Map,'3028961','Location');
+  var TreeTrimLayer = new TkMapFusionLayer({map:themap.Map,tableid:'3028961',geo:'Location'});
   // Open checkbox listener
   $("#open").click(function() {
     if ($("#open").is(':checked')) {
-      TreeTrimLayer.showLayer('search','Open','Status');
+      TreeTrimLayer.showLayer({where:"Status = 'Open'",icon:'small_green'});
     } else {
-      TreeTrimLayer.showLayer();
+      TreeTrimLayer.showLayer({});
     }
   });
 });
@@ -148,7 +144,7 @@ $(document).ready(function() {
 	<script src="js/thirdparty/prettify.js"></script>
 	<script src="https://maps-api-ssl.google.com/maps/api/js?v=3.8&sensor=false"></script>
 	<script src="js/tkmap/tkmap.3.0.0.js"></script>
-	<script src="js/tkmapfusionlayer/tkmapfusionlayer.2.0.0.js"></script>
+	<script src="js/tkmapfusionlayer/tkmapfusionlayer.3.0.0.js"></script>
 	<script src="js/demo/tkmapfusionlayercontroller.js"></script>
 	<script>
 		var _gaq = _gaq || [];
