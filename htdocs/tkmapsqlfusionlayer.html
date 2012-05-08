@@ -48,19 +48,15 @@
 				<div class="row-fluid">
 					<div class="span6">
 						<div class="row-fluid">
-							<div class="span2">
-								<p><a class="btn btn-primary" href="demos.html"><i class="icon-chevron-left icon-white"></i> Back</a></p>
-							</div>
-							<div class="span10">
-								<h2>JS Library Demo</h2>
-								<h3>tkmapsqlfusionlayer.js</h3>
+							<div class="span12">
+								<h2>tkmapsqlfusionlayer.js Demo</h2>
 							</div>
 						</div>
 						<hr>
 						<div class="well">
-							<p>In this example, we map a Fusion Table of tree trimming requests to Chicago's 311.</p>
+							<p>In this example, we map a Fusion Table of bike racks in Chicago's 49th Ward.</p>
 							<label class="checkbox">
-								<input id="open" type="checkbox"> Show only tree trimming requests not yet serviced by the City
+								<input id="open" type="checkbox"> <b>Show only bike racks on Sheridan Road.</b>
 							</label>
 						</div>
 						<div class="well">
@@ -94,15 +90,32 @@
 <pre class="prettyprint">
 $(document).ready(function() {
   // The Google Maps base map layer
-  var Map = new TkMap(true,'map',42.01048,-87.6652,15,true,'road minlabels grey');
-  // The tree trim request map layer
-  var TreeTrimLayer = new TkMapFusionLayer(true,Map.map,'3676987','Latitude,Longitude','Status','/img/o.png','image');
+  var Map = new TkMap({
+    lat:42.01048,
+    lng:-87.6652,
+    domid:'map',
+    init:true
+  });
+  // The Bike Rack Layer
+  var RackLayer = new TkMapSqlFusionLayer
+  ({
+    map:Map.Map,
+    tableid:'3815321',
+    lat:'Latitude',
+    lng:'Longitude',
+    datacols:'Address,Ward,CommunityName',
+    where:"Ward = '49'",
+    iconurl:'/img/o.png'
+  });
   // Open checkbox listener
   $("#open").click(function() {
     if ($("#open").is(':checked')) {
-      TreeTrimLayer.showLayer('search','Open','Status');
+      RackLayer.showLayer({
+        col:'Address',
+        val:'Sheridan'
+      });
     } else {
-      TreeTrimLayer.showLayer();
+      RackLayer.showLayer({});
     }
   });
 });
@@ -128,10 +141,9 @@ $(document).ready(function() {
 				<hr />
 				<div class="well">
 					<p>Author: <a href="http://twitter.com/tomkompare">Tom Kompare</a><br />
-					Data Source: <a href="https://data.cityofchicago.org/Service-Requests/311-Service-Requests-Tree-Trims/uxic-zsuj">data.cityofchicago.org</a><br /></p>
+					Data Source: <a href="https://data.cityofchicago.org/Transportation/Bike-Racks-Map/4ywc-hr3a">data.cityofchicago.org</a><br /></p>
 					<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/us/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/">Creative Commons Attribution-NonCommercial 3.0 United States License</a>.</p>
-					<p>All open and completed tree trim requests made to 311 since January 1, 2011.* The Department of Streets and Sanitation maintains all trees growing in the public way.</p>
-					<p><em>* data last updated: April 18, 2012</em></p>
+					<p><em>* data last updated: May 8, 2012</em></p>
 				</div>
 			</div>
 		</div>
@@ -142,8 +154,8 @@ $(document).ready(function() {
 	<script src="js/thirdparty/bootstrap.min.js"></script>
 	<script src="js/thirdparty/prettify.js"></script>
 	<script src="https://maps-api-ssl.google.com/maps/api/js?v=3.8&sensor=false"></script>
-	<script src="js/tkmap/tkmap.2.1.0.js"></script>
-	<script src="js/tkmapsqlfusionlayer/tkmapsqlfusionlayer.0.1.0.js"></script>
+	<script src="js/tkmap/tkmap.3.0.0.js"></script>
+	<script src="js/tkmapsqlfusionlayer/tkmapsqlfusionlayer.1.0.0.js"></script>
 	<script src="js/demo/tkmapsqlfusionlayercontroller.js"></script>
 	<script>
 		var _gaq = _gaq || [];
