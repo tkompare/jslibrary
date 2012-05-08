@@ -9,17 +9,17 @@ function TkMapSqlFusionLayer(Args)
 		// If geo not defined, lat and lng are required
 	var Lat = typeof Args.lat !== 'undefined' ? Args.lat : null;
 	var Lng = typeof Args.lng !== 'undefined' ? Args.lng : null;
+		// If iconurl not defined, then iconcol is required
+	var IconUrl = typeof Args.iconurl !== 'undefined' ? Args.iconurl : null;
+	var IconCol = typeof Args.iconcol !== 'undefined' ? Args.iconcol : null;
 	// Default private properties from optional arguments
 	var DataCols = typeof Args.datacols !== 'undefined' ? Args.datacols : null;
 	var Where = typeof Args.where !== 'undefined' ? Args.where : null;
-	var IconUrl = typeof Args.iconurl !== 'undefined' ? Args.iconurl : null;
-	var IconCol = typeof Args.iconcol !== 'undefined' ? Args.iconcol : null;
-	// Default private properties
-	this.Markers = [];
-	this.InfoWindows = [];
 	// Default public properties
 	this.Layer = null;
 	this.Table = null;
+	this.Markers = [];
+	this.InfoWindows = [];
 	/* METHODS *****************************************************************/
 	this.showLayer = function(Args)
 	{
