@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>tkmapsqlfusionlayer.js Documentation</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 minimim-scale=1">
+	<meta name="description" content="A Javascript library of useful tools">
+	<meta name="author" content="tom@kompare.us (Tom Kompare)">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/prettify.css" rel="stylesheet" />
+	<style type="text/css">
+	body {
+		padding-top: 50px;
+		padding-bottom: 15px;
+	}
+	</style>
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="apple-touch-icon" href="/img/311icon.png">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+<body onload="prettyPrint()">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="/">JS Library</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="/demos.html">Demos</a></li>
+						<li class="active"><a href="/docs.html">Docs</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="hero-unit">
+			<h1>tkmapsqlfusionlayer.js</h1>
+			<p>Documentation for version 1.0.0</p>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<h2>Examples</h2>
+				<div class="well">
+				<pre class="prettyprint">
+var MapLayer = new TkMapSqlFusionLayer
+({
+  map : Map.Map,
+  tableid : '3815321',
+  lat : 'Latitude',
+  lng : 'Longitude',
+  datacols: 'Address,Ward,CommunityName',
+  where : "Ward = '49'",
+  iconurl : '/img/o.png'
+});</pre>
+<pre class="prettyprint">
+var MapLayer = new TkMapSqlFusionLayer
+({
+  map : Map.Map,
+  tableid : '3815321',
+  lat : 'Latitude',
+  lng : 'Longitude',
+  iconcol : 'IconColumn'
+});</pre>
+					<p><a href="../tkmapsqlfusionlayer.html">See a working example</a></p>
+				</div>
+				<h2>Constructor</h2>
+				<div class="well">
+<pre class="prettyprint">
+TkMapFusionLayer ({
+  datacols : {string},
+  geo : {string},
+  iconcol : {string},
+  iconurl : {string},
+  lat : {float},
+  lng : {float},
+  map : {object},
+  tableid : {int},
+  where : {string}
+});</pre>
+					<h3>Arguments</h3>
+					<p>The order in which arguments are defined in the constructor is 
+						meaningless. However, <b>map</b> and <b>tableid</b> are required.
+						Additionally, either <b>geo</b>, or <b>lat</b> and <b>lng</b> are
+						required. Either <b>iconcol</b> or <b>iconurl</b> is also required.
+					</p>
+					<div class="well">
+						<h4>datacols</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">optional</span> The names of
+							Google Fusion Tables column to display in the Google Maps info
+							window. These should be a comma-delimited list as in the example
+							above.
+						</p>
+					</div>
+					<div class="well">
+						<h4>geo</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">optional</span> The name of the
+							Google Fusion Tables column that holds the geographic location
+							information for the row of data. The geographic information must
+							be in decimal degrees. Either 'geo', or 'lat' and 'lng' are
+							required.
+						</p>
+					</div>
+					<div class="well">
+						<h4>iconcol</h4>
+						<p><span class="label label-info">string</span> 
+							<span class="label label-info">optional</span> The name of the
+							Google Fusion Table column that holds the URL to the icon graphic
+							file. Point map only. Either 'iconcol' or 'iconcol' are required.
+						</p>
+					</div>
+					<div class="well">
+						<h4>iconurl</h4>
+						<p><span class="label label-info">string</span> 
+							<span class="label label-info">optional</span> The URL of the icon
+							graphic file. Point map only. Either 'iconcol' or 'iconcol' are
+							required.
+						</p>
+					</div>
+					<div class="well">
+						<h4>lat</h4>
+						<p><span class="label label-info">float</span>
+							<span class="label label-info">optional</span> The Latitude column
+							of the Google Fusion Table. Either 'geo', or 'lat' and 'lng' are
+							required.
+						</p>
+					</div>
+					<div class="well">
+						<h4>lng</h4>
+						<p><span class="label label-info">float</span>
+							<span class="label label-info">optional</span> The Longitude column
+							of the Google Fusion Table. Either 'geo', or 'lat' and 'lng' are
+							required.
+						</p>
+					</div>
+					<div class="well">
+						<h4>map</h4>
+						<p><span class="label label-info">object</span>
+							<span class="label label-info">required</span> The 
+							<i>google.maps.Map</i> object onto which this Fusion Tables data
+							layer is will display. If you are using <a href="tkmap.html">TkMap base map object</a>,
+							this would be the '<i>TkMap.Map</i>' property.
+						</p>
+					</div>
+					<div class="well">
+						<h4>tableid</h4>
+						<p><span class="label label-info">integer</span>
+							<span class="label label-info">required</span> The 'Numeric ID' of
+							the Google Fusion Table to place on the map.
+						</p>
+					</div>
+					<div class="well">
+						<h4>where</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">optional</span> The WHERE clause
+							for the Google Fusion Table query. If this argument is not
+							defined, all data rows are mapped. Follow the specification found
+							in the <a href="https://developers.google.com/fusiontables/docs/developers_reference#Select">
+							Google Fusion Tables documentation</a>. The syntax is generally:
+							&lt;column_name&gt; &lt;operator&gt; &lt;value&gt; It is best to
+							double-quote the entire string, and single quote the value. 
+						</p>
+					</div>
+				</div>
+				<h2>Methods</h2>
+				<div class="well">
+					<div class="well">
+						<h3>.showLayer()</h3>
+						<h4>Example</h4>
+<pre class="prettyprint">
+MapLayer.showLayer({
+  col:'Address',
+  val:'Sheridan'
+});
+</pre>
+						<p>Displays the Google Fusion Table map layer in the specified
+							'google.maps.Map' object. If no arguments are passed, all data
+							rows are displayed.
+						</p>
+						<h4>Arguments</h4>
+						<p><b>col</b><br>
+							<span class="label label-info">string</span> 
+							<span class="label label-info">optional</span> The name of the
+							Google Fusion Table column to search in. 'val' is required if 'col'
+							is defined.
+						</p>
+						<p><b>val</b><br>
+							<span class="label label-info">string</span> 
+							<span class="label label-info">optional</span> The value to find
+							in the 'col' column. If the value is found anywhere in the row's
+							'col' column, the data row is displayed. 'val' is required if 'col'
+							is defined.
+						</p>
+					</div>
+					<div class="well">
+						<h3>.hideLayer()</h3>
+						<p>Hides the map layer in the specified google.maps.Map object.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<footer>
+			<p>Author: <a href="http://twitter.com/tomkompare">Tom Kompare</a></p>
+			<p>Code: <a href="https://github.com/tkompare/jslibrary">https://github.com/tkompare/jslibrary</a></p>
+			<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/us/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/">Creative Commons Attribution-NonCommercial 3.0 United States License</a>.</p>
+		</footer>
+	</div>
+	
+	<!-- Le javascript ================================================== -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="/js/thirdparty/bootstrap.min.js"></script>
+		<script src="/js/thirdparty/prettify.js"></script>
+	<script>
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-31004074-1']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+</html>

@@ -120,7 +120,17 @@ function TkMapSqlFusionLayer(Args)
 					icon: row[iconCol]
 				});
 			}
-			google.maps.event.addListener(this.Markers[i],'click',this.setListener({marker:this.Markers[i],infowin:this.InfoWindows[i]}));
+			if (DataCols !== null)
+			{
+				google.maps.event.addListener(
+					this.Markers[i],
+					'click',
+					this.setListener({
+						marker:this.Markers[i],
+						infowin:this.InfoWindows[i]
+					})
+				);
+			}
 		}
 	};
 	this.setListener = function(Args)
@@ -139,7 +149,7 @@ function TkMapSqlFusionLayer(Args)
 		}
 		return query;
 	};
-	this.setColNames = function()
+	var setColNames = function()
 	{
 		var ColNames = [];
 		if (Geo !== null)
@@ -167,7 +177,7 @@ function TkMapSqlFusionLayer(Args)
 	};
 	if(Map !== null && TableId !== null && (Geo !== null || (Lat !== null && Lng !== null)))
 	{
-		this.ColNames = this.setColNames();
+		this.ColNames = setColNames();
 		this.showLayer({});
 	}
 };
