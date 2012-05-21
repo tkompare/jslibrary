@@ -12,11 +12,6 @@ function TkSocrataView(Args)
 	/**
 	 * this.init is run at time of instantiation.
 	 */
-	this.init = function()
-	{
-		SocrataUrl = this.setSocrataUrl();
-		$.get(SocrataUrl, this.dataHandler, 'jsonp');
-	};
 	this.dataHandler = function(TheData)
 	{
 		// Get the column names
@@ -45,24 +40,14 @@ function TkSocrataView(Args)
 			}
 		}
 	};
+	//Constructor (sort of...)
+	if (ViewId !== null || Domain !== null)
+	{
+		SocrataUrl = 'http://'+Domain+'/api/views/'+ViewId+'/rows.json?jsonp=?';;
+		$.get(SocrataUrl, this.dataHandler, 'jsonp');
+	};
 	this.getData = function()
 	{
 		return Data;
 	};
-	this.setSocrataUrl = function()
-	{
-		if (ViewId !== null)
-		{
-			return 'http://'+Domain+'/api/views/'+ViewId+'/rows.json?jsonp=?';
-		}
-		else
-		{
-			return null;
-		}
-	};
-	// Constructor (sort of...)
-	if (ViewId !== null || Domain !== null)
-	{
-		this.init();
-	}
 };
