@@ -72,7 +72,7 @@ TkSocrataView ({
 						<p><span class="label label-info">string</span>
 							<span class="label label-info">required</span> The <i>id</i> value
 							of the Socrata data view. This is usually four alphanumeric
-							characters, followed by a dash (-), folloed by four more
+							characters, followed by a dash (-), followed by four more
 							alphanumenric characters.  For example: <em>b7mg-yyns</em>
 						</p>
 					</div>
@@ -94,12 +94,15 @@ TkSocrataView ({
 					<div class="well">
 						<h3>.getData()</h3>
 						<p>Get the object that holds the data from the Socrata View. Data is
-							addresses by row number and then column name. Each column name is
-							the <em>SODA.meta.view.columns[i].fieldName</em> passed in the
-							JSON string response from Socrata. For example:
-							<em>Data[0].doing_business_as_name</em> Warning: this method will
-							not return data until the data is finished downloading from the
-							data source.
+							addressed by row number and then column name. For example:
+							<em>LicenseData[0].doing_business_as_name</em><br><br>Each column
+							name is the <em>SODA.meta.view.columns[i].fieldName</em> passed in
+							the JSON string response from Socrata. As viewed on the
+							Socrata-powered data web site, the 'doing_business_as_name' column
+							is labeled 'DOING BUSINESS AS NAME'. The <em>fieldName</em> is
+							always the diplayed column name in all lower case, and underscores
+							in place of spaces.<br><br>Warning: this method will not return
+							data until the data is finished downloading from the data source.
 						</p>
 						<pre class="prettyprint">
 var LicenseData = Licenses.getData();
