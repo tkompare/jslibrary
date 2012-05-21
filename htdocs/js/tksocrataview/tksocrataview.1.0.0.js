@@ -6,7 +6,6 @@ function TkSocrataView(Args)
 	var Domain = typeof Args.domain !== 'undefined' ? Args.domain : null;
 	// Default private properties
 	var SocrataUrl = null;
-	// Public properties
 	var Data = [];
 	/* METHODS *****************************************************************/
 	var dataHandler = function(TheData)
