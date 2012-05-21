@@ -9,10 +9,7 @@ function TkSocrataView(Args)
 	// Public properties
 	var Data = [];
 	/* METHODS *****************************************************************/
-	/**
-	 * this.init is run at time of instantiation.
-	 */
-	this.dataHandler = function(TheData)
+	var dataHandler = function(TheData)
 	{
 		// Get the column names
 		var SocrataColNames = [];
@@ -44,7 +41,7 @@ function TkSocrataView(Args)
 	if (ViewId !== null || Domain !== null)
 	{
 		SocrataUrl = 'http://'+Domain+'/api/views/'+ViewId+'/rows.json?jsonp=?';;
-		$.get(SocrataUrl, this.dataHandler, 'jsonp');
+		$.get(SocrataUrl, dataHandler, 'jsonp');
 	};
 	this.getData = function()
 	{
