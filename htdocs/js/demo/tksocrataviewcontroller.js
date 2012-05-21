@@ -1,7 +1,7 @@
 var Data = null;
 var BusinessLicenses = new TkSocrataView
 ({
-	tableid : 'b7mg-yyns',
+	viewid : 'b7mg-yyns',
 	domain : 'data.cityofchicago.org'
 });
 $("#search-button").click(function(){
@@ -23,6 +23,6 @@ $("#search-button").click(function(){
 	}
 	if (matched === 0)
 	{
-		$('#alertbox').append('<div class="alert alert-error">Your search did not find any businesses within Chicago\'s 49th Ward');
+		$('#alertbox').append('<div class="alert alert-error">Your search did not find any businesses within Chicago\'s 49th Ward, or the data request to the data source is not yet complete.');
 	}
 });

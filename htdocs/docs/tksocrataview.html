@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>tksocrataview.js Documentation</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 minimim-scale=1">
+	<meta name="description" content="A Javascript library of useful tools">
+	<meta name="author" content="tom@kompare.us (Tom Kompare)">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/prettify.css" rel="stylesheet" />
+	<style type="text/css">
+	body {
+		padding-top: 50px;
+		padding-bottom: 15px;
+	}
+	</style>
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="apple-touch-icon" href="/img/311icon.png">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+<body onload="prettyPrint()">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="/">JS Library</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="/demos.html">Demos</a></li>
+						<li class="active"><a href="/docs.html">Docs</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="hero-unit">
+			<h1>tksocrataview.js</h1>
+			<p>Documentation for version 1.0.0</p>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<h2>Examples</h2>
+				<div class="well">
+				<pre class="prettyprint">
+var Licenses = TkSocrataView({
+  viewid:'b7mg-yyns',
+  domain:'data.cityofchicago.org'
+});</pre>
+					<p><a href="../tksocrataview.html">See a working example</a></p>
+					<p><a href="http://socrata.com" target="_blank">Learn about Socrata</a></p>
+				</div>
+				<h2>Constructor</h2>
+				<div class="well">
+<pre class="prettyprint">
+TkSocrataView ({
+  viewid : {string},
+  domain : {string}
+});</pre>
+					<h3>Arguments</h3>
+					<p>The order in which arguments are defined in the constructor is 
+						meaningless. However <b>viewid</b> and <b>domain</b> are required.</p>
+					<div class="well">
+						<h4>viewid</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">required</span> The <i>id</i> value
+							of the Socrata data view. This is usually four alphanumeric
+							characters, followed by a dash (-), folloed by four more
+							alphanumenric characters.  For example: <em>b7mg-yyns</em>
+						</p>
+					</div>
+					<div class="well">
+						<h4>domain</h4>
+						<p><span class="label label-info">string</span>
+							<span class="label label-info">required</span> The domain name
+							of the Socrata powered data wherehouse. For example:
+							<em>data.cityofchicago.org</em>
+						</p>
+					</div>
+				</div>
+				<h2>Properties</h2>
+				<div class="well">
+					<p>None public</p>
+				</div>
+				<h2>Methods</h2>
+				<div class="well">
+					<div class="well">
+						<h3>.getData()</h3>
+						<p>Get the object that holds the data from the Socrata View. Data is
+							addresses by row number and then column name. Each column name is
+							the <em>SODA.meta.view.columns[i].fieldName</em> passed in the
+							JSON string response from Socrata. For example:
+							<em>Data[0].doing_business_as_name</em> Warning: this method will
+							not return data until the data is finished downloading from the
+							data source.
+						</p>
+						<pre class="prettyprint">
+var LicenseData = Licenses.getData();
+console.log(LicenseData[0].doing_business_as_name);</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<footer>
+			<p>Author: <a href="http://twitter.com/tomkompare">Tom Kompare</a></p>
+			<p>Code: <a href="https://github.com/tkompare/jslibrary">https://github.com/tkompare/jslibrary</a></p>
+			<p>License: <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/us/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/">Creative Commons Attribution-NonCommercial 3.0 United States License</a>.</p>
+		</footer>
+	</div>
+	
+	<!-- Le javascript ================================================== -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="/js/thirdparty/bootstrap.min.js"></script>
+		<script src="/js/thirdparty/prettify.js"></script>
+	<script>
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-31004074-1']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+</html>
