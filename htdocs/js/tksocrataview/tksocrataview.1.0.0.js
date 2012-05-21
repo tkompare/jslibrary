@@ -22,13 +22,14 @@ function TkSocrataView(Args)
 		var newColLength = SocrataColNames.length;
 		// Grab the data
 		var SocrataData = TheData.data;
-		// Remove unneeded SODA 1.0 columns
 		for (var i=0; i<SocrataData.length; i++)
 		{
+		// Remove unneeded SODA 1.0 columns
 			for (var j=0; j<9; j++)
 			{
 				SocrataData[i].shift();
 			}
+			// Construct the Data array
 			Data[i] = {};
 			for (var j=0; j<newColLength; j++)
 			{
